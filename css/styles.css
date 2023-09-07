@@ -9,6 +9,7 @@
   --accent-cornflower: #E7E9FC;
   --mint: #31D0AA;
   --lightscale: #8E8F99;
+  --dairy: #FCFCFC;
 }
 
 body {
@@ -20,7 +21,7 @@ body {
   background-color: var(--background-white);
   color: var(--primary-text);
   font-size: 16px;
-  letter-spacing: 0.03em;  
+  letter-spacing: 0.03em; 
 }
 
 /* css resets */
@@ -164,17 +165,20 @@ address {
   color: var(--cta)
 }
 
-.nav-menu .page{
+/* underlined effects */
+.nav-menu .current-link{
   position: relative;
+  text-decoration: none;
+  color: var(--cta);
 }
 
-.nav-menu .page::after{
+.current-link::after{
     content: '';
     position: absolute;
     left: 0;
     bottom: 0;
     border-radius: 2px;
-    width: 48px;
+    width: 100%;
     height: 4px;
     background-color: var(--cta);
 }
@@ -415,6 +419,8 @@ address {
   position: relative;
 }
 
+/* overlay animation */
+
 .cards-box {
   position: relative;
   width: auto;
@@ -437,6 +443,7 @@ address {
 
 .cards:hover .overlay {
   transform: translateY(0);
+  will-change: transform;
 }
 
 .overlay p {
@@ -578,13 +585,89 @@ address {
   background: var(--mint);
 }
 
-.backdrop {
-  display: none;
-  position: relative;
+
+.modal{
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+  opacity: 1;
+  transition-property: visibility, opacity;
+  transition-duration: 250ms;
+  transform: none;
 }
+
+.modal.is-hidden{
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none; 
+  transform: translateY(-20px);
+}
+
+.modal.is-hidden .modal-content{
+  transform: scale(0.5);
+}
+
+.modal-content{
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 408px;
+  height: 584px;
+  border-radius: 4px;
+  background: var(--dairy);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.20), 
+              0px 1px 3px 0px rgba(0, 0, 0, 0.12), 
+              0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+  transform: none;
+  transition: transform 250ms;
+}
+
+.modal-close{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-color);
+  border: solid 1px var(--lightscale);
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  border-radius: 50%;
+  right: 0;
+  top: 0;
+  margin-top: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.close-icon {
+  width: 100%;
+  height: 100%;
+  margin-top: 12px;
+  fill: var(--dark);
+  
+
+}
+
+.modal-close:active {
+  background-color: var(--cta);
+}
+.close-icon:active{
+  fill: var(--background-white);
+}
+
+
+
+
+
+
+
 
 
 
